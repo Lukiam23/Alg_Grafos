@@ -8,6 +8,7 @@ class No:
 	
 	def addV(self,no):
 		self.vizinhos.append(no)
+		no.vizinhos.append(self)
 	
 	def getV(self):
 		return self.vizinhos
@@ -27,12 +28,13 @@ def BFS(*grafo,s):
 	fila = []
 	fila.append(s)
 	while len(fila)>0:
-		u = fila.pop()
+		u = fila.pop(0)
 		componente.append(u)
 		for v in u.getV():
 			if not v.atingido:
 				v.atingir()
 				fila.append(v)
+		u.atingir()
 	return componente
 
 def main():
@@ -40,11 +42,14 @@ def main():
 	for i in range(0,10):
 		vetorNos.append(No(i))
 	no1 = No(1)
-	for i in range(2,6):
-		no1.addV(vetorNos[i])
+	no1.addV(vetorNos[3])
+	no1.addV(vetorNos[4])
+	no1.addV(vetorNos[5])
+	no1.addV(vetorNos[6])
+		
 
 	for i in BFS(*vetorNos,s=no1):
-		print(i)
+		print(i, end = '')
 
 
 if __name__ == "__main__":
