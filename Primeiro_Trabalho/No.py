@@ -37,19 +37,35 @@ def BFS(*grafo,s):
 		u.atingir()
 	return componente
 
-def main():
-	vetorNos = []
-	for i in range(0,10):
-		vetorNos.append(No(i))
-	no1 = No(1)
-	no1.addV(vetorNos[3])
-	no1.addV(vetorNos[4])
-	no1.addV(vetorNos[5])
-	no1.addV(vetorNos[6])
-		
+def tratar(*string):
+	vetorInteiro = [] 
+	aux = ""
+	for i in string:
+		if i != " ":
+			aux += i
+		else:
+			vetorInteiro.append(int(aux))
+			aux = ""
+	vetorInteiro.append(int(aux))
+	return vetorInteiro
 
-	for i in BFS(*vetorNos,s=no1):
-		print(i, end = '')
+def main():
+	grafo = []
+	
+	n = int(input())
+	for i in range(1,n+1):
+		grafo.append(No(i))
+
+	aresta = input()	
+	while(aresta != ""):
+		vertices = tratar(*aresta)
+		grafo[vertices[0] - 1].addV(grafo[vertices[1] - 1])
+		aresta = input()
+	for no  in grafo:
+		if not no.atingido:
+			for i in BFS(*grafo,s=no):
+				print(i," ", end = '')
+		print("\n")
 
 
 if __name__ == "__main__":
