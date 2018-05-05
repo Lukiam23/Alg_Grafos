@@ -36,7 +36,7 @@ def BFS(*grafo,s):
 				v.atingir()
 				fila.append(v)
 		u.atingir()
-	return componente
+	return sorted(componente, key=id)
 
 def tratar(*string):
 	vetorInteiro = [] 
