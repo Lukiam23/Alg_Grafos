@@ -1,4 +1,5 @@
 #_*_ coding: utf8 _*_
+
 class No:
 	
 	def __init__(self,id):
@@ -61,11 +62,15 @@ def main():
 		vertices = tratar(*aresta)
 		grafo[vertices[0] - 1].addV(grafo[vertices[1] - 1])
 		aresta = input()
+
+
 	for no  in grafo:
 		if not no.atingido:
+			s = ""
 			for i in BFS(*grafo,s=no):
-				print(i," ", end = '')
-		print("\n")
+				s += str(i)+" "
+			print(s)
+		
 
 
 if __name__ == "__main__":
