@@ -13,10 +13,7 @@ class No:
 	
 	def getV(self):
 		return self.vizinhos
-	
-	def isIn(self,no):
-		return (no in self.vizinhos)
-	
+
 	def atingir(self):
 		self.atingido = True
 	
@@ -38,38 +35,33 @@ def BFS(*grafo,s):
 		u.atingir()
 	return sorted(componente, key=id)
 
-def tratar(*string):
-	vetorInteiro = [] 
-	aux = ""
-	for i in string:
-		if i != " ":
-			aux += i
-		else:
-			vetorInteiro.append(int(aux))
-			aux = ""
-	vetorInteiro.append(int(aux))
-	return vetorInteiro
-
 def main():
-	grafo = []
 	
-	n = int(input())
+	input()
+	input()
+	n = int(input().split('=')[1])
+	input()
+	
+	grafo = []
 	for i in range(1,n+1):
 		grafo.append(No(i))
 
 	aresta = input()	
 	while(aresta != ""):
-		vertices = tratar(*aresta)
-		grafo[vertices[0] - 1].addV(grafo[vertices[1] - 1])
-		aresta = input()
+		vertices = aresta.split()
+		grafo[int(vertices[0]) - 1].addV(grafo[int(vertices[1]) - 1])
+		try:
+			aresta = input()
+		except:
+			break
 
-
+	s = ""
 	for no  in grafo:
 		if not no.atingido:
-			s = ""
 			for i in BFS(*grafo,s=no):
 				s += str(i)+" "
-			print(s)
+			s += "\n"
+	print(s)
 		
 
 
