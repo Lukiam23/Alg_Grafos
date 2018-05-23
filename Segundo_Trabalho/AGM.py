@@ -4,18 +4,13 @@ class Vertice:
 	def __init__(self,id):
 		self.id = id
 		self.vizinhos = []
-		self.atingido = False
-		self.pai = None
-	
+
 	def addV(self,no):
 		self.vizinhos.append(no)
 		no.vizinhos.append(self)
 	
 	def getV(self):
 		return self.vizinhos
-
-	def atingir(self):
-		self.atingido = True
 	
 	def __str__(self):
 		return str(self.id)
@@ -35,12 +30,12 @@ class Heap:
 		l = self.left(i)
 		r = self.right(i)
 		
-		if l < self.size and self.heap[l] < self.heap[i]:
+		if l < self.size and self.heap[l].peso < self.heap[i].peso:
 			smallest = l
 		else:
 			smallest = i
 
-		if r < self.size and self.heap[r] < self.heap[smallest]:
+		if r < self.size and self.heap[r].peso < self.heap[smallest].peso:
 			smallest = r
 		if smallest != i:
 			aux = self.heap[i]
@@ -70,14 +65,25 @@ class Heap:
 	def left(self,i):
 		return 2*i
 
-array = [-1,2,4,8,7]
-heap = Heap()
-heap.build(*array)
-for i in heap.heap:
-	print(i)
-n=1
-while n != 0:
-	n = int(input("Insira o número:"))
-	heap.heapExtract()
-	for i in heap.heap:
-		print(i)
+def main():
+	input()
+	input()
+	n = int(input().split('=')[1])
+	input()
+	hashTable = {}
+	grafo = []
+	for i in range(1,n+1):
+		grafo.append(Vertice(i))
+		hashTable[i] = grafo[i-1]
+	heap = Heap()
+	while(aresta != ""):
+		origem,destino,peso = aresta.split()
+		heap.build(Aresta(origem,peso,destino))
+
+		try:
+			aresta = input()
+		except:
+			break
+	
+if __name__ == "__main__":
+	main()
